@@ -33,7 +33,7 @@
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
                         aria-expanded="false"><i class="fa-solid fa-boxes-stacked"></i> <span class="hide-menu">
                             Kategori Produk</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('produk.index') }}"
                         aria-expanded="false"><i class="fa-solid fa-box"></i> <span class="hide-menu">
                             Produk</span></a></li>
                 <hr>

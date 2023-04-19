@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriProduk;
 use App\Models\Produk;
+use App\Models\Satuan;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -10,9 +14,13 @@ class ProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Produk::paginate(10);
+        if ($request->key) {
+            $data = Produk::where('name', $request->key)->paginate(10);
+        }
+        return view('pages.produk.index', compact('data'));
     }
 
     /**
@@ -20,7 +28,9 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        $satuans = Satuan::get();
+        $kategori = KategoriProduk::get();
+        return view('pages.produk.create', compact('satuans','kategori'));
     }
 
     /**
@@ -28,7 +38,20 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request = $request->validated();
+        try {
+            $model = new Produk;
+            $model->satuan_id = $request['satuan_id'];
+            $model->kategori_id = $request['kategori_id'];
+            $model->name = $request['name'];
+            $model->save();
+        } catch (Exception $e) {
+            return back()->withError('Terjadi kesalahan.');
+        } catch (QueryException $e) {
+            return back()->withError('Terjadi kesalahan pada database.');
+        }
+
+        return redirect()->route('satuan.index')->withStatus('Data berhasil disimpan.');
     }
 
     /**
@@ -44,7 +67,10 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        $satuans = Satuan::get();
+        $kategori = KategoriProduk::get();
+        $data = $produk;
+        return view('pages.produk.edit', compact('data','satuans','kategori'));
     }
 
     /**
@@ -52,7 +78,20 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        // $request = $request->validated();
+        // try {
+        //     $model = $satuan;
+        //     $model->name = $request['name'];
+        //     $model->name = $request['name'];
+        //     $model->name = $request['name'];
+        //     $model->save();
+        // } catch (Exception $e) {
+        //     return back()->withError('Terjadi kesalahan.');
+        // } catch (QueryException $e) {
+        //     return back()->withError('Terjadi kesalahan pada database.');
+        // }
+
+        return redirect()->route('satuan.index')->withStatus('Data berhasil diubah.');
     }
 
     /**
@@ -60,6 +99,15 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        // try {
+        //     $model->name = $request['name'];
+        //     Produk->delete();
+        // } catch (Exception $e) {
+        //     return back()->withError('Terjadi kesalahan.');
+        // } catch (QueryException $e) {
+        //     return back()->withError('Terjadi kesalahan pada database.');
+        // }
+
+        return redirect()->route('produk.index')->withStatus('Data berhasil dihapus.');
     }
 }
