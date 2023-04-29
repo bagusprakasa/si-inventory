@@ -13,7 +13,7 @@
                             {{ Request::segment(2) != null ? ucwords(Request::segment(2)) : 'List' }}</li>
                     </ol>
                 </nav>
-                <h1 class="mb-0 fw-bold">{{ ucwords(Request::segment(1)) }}</h1>
+                <h1 class="mb-0 fw-bold">Kategori Produk</h1>
             </div>
         </div>
     </div>
