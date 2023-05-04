@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\GuideDriverController;
-use App\Http\Controllers\KategoriProdukController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SatuanController;
-use App\Http\Controllers\BarangKeluarController;
-use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\GuideDriverController;
+use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\KategoriProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('satuan', SatuanController::class);
     Route::resource('produk', ProdukController::class);
     Route::resource('barang-keluar', BarangKeluarController::class);
+    Route::resource('barang-masuk', BarangMasukController::class);
     Route::resource('guide-driver', GuideDriverController::class);
     Route::resource('kategori_produk', KategoriProdukController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
