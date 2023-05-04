@@ -52,10 +52,11 @@
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">No</th>
-                                        <th class="border-top-0">Nama Barang</th>
-                                        <th class="border-top-0">Harga Barang</th>
-                                        <th class="border-top-0">Kuantitas Barang</th>
-                                        <th class="border-top-0">Sub Total</th>
+                                        <th class="border-top-0">No Transaksi</th>
+                                        <th class="border-top-0">Tanggal Transaksi</th>
+                                        <th class="border-top-0">Jumlah Kuantitas Barang</th>
+                                        <th class="border-top-0">Grand Total</th>
+                                        <th class="border-top-0">Catatan</th>
                                         <th class="border-top-0">Aksi</th>
                                     </tr>
                                 </thead>
