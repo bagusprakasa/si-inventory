@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KategoriProduk;
+use App\Http\Requests\RequestProduk;
 use App\Models\Produk;
 use App\Models\Satuan;
 use Exception;
@@ -16,9 +17,9 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Produk::paginate(10);
+        $data = Produk::with('satuan','kategori')->paginate(10);
         if ($request->key) {
-            $data = Produk::where('name', $request->key)->paginate(10);
+            $data = Produk::with('satuan','kategori')->where('name', $request->key)->paginate(10);
         }
         return view('pages.produk.index', compact('data'));
     }
@@ -36,22 +37,25 @@ class ProdukController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RequestProduk $request)
     {
+        // return $request->all();
         $request = $request->validated();
         try {
             $model = new Produk;
-            $model->satuan_id = $request['satuan_id'];
-            $model->kategori_id = $request['kategori_id'];
+            $model->satuan_id = $request['id_satuan'];
+            $model->kategori_id = $request['id_kategori'];
             $model->name = $request['name'];
             $model->save();
         } catch (Exception $e) {
-            return back()->withError('Terjadi kesalahan.');
+            // return back()->withError('Terjadi kesalahan.');
+            return $e;
         } catch (QueryException $e) {
-            return back()->withError('Terjadi kesalahan pada database.');
+            return $e;
+            // return back()->withError('Terjadi kesalahan pada database.');
         }
 
-        return redirect()->route('satuan.index')->withStatus('Data berhasil disimpan.');
+        return redirect()->route('produk.index')->withStatus('Data berhasil disimpan.');
     }
 
     /**
@@ -76,22 +80,22 @@ class ProdukController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produk $produk)
+    public function update(RequestProduk $request, Produk $produk)
     {
-        // $request = $request->validated();
-        // try {
-        //     $model = $satuan;
-        //     $model->name = $request['name'];
-        //     $model->name = $request['name'];
-        //     $model->name = $request['name'];
-        //     $model->save();
-        // } catch (Exception $e) {
-        //     return back()->withError('Terjadi kesalahan.');
-        // } catch (QueryException $e) {
-        //     return back()->withError('Terjadi kesalahan pada database.');
-        // }
+        $request = $request->validated();
+        try {
+            $model = $produk;
+            $model->satuan_id = $request['id_satuan'];
+            $model->kategori_id = $request['id_kategori'];
+            $model->name = $request['name'];
+            $model->save();
+        } catch (Exception $e) {
+            return back()->withError('Terjadi kesalahan.');
+        } catch (QueryException $e) {
+            return back()->withError('Terjadi kesalahan pada database.');
+        }
 
-        return redirect()->route('satuan.index')->withStatus('Data berhasil diubah.');
+        return redirect()->route('produk.index')->withStatus('Data berhasil diubah.');
     }
 
     /**
@@ -99,15 +103,14 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        // try {
-        //     $model->name = $request['name'];
-        //     Produk->delete();
-        // } catch (Exception $e) {
-        //     return back()->withError('Terjadi kesalahan.');
-        // } catch (QueryException $e) {
-        //     return back()->withError('Terjadi kesalahan pada database.');
-        // }
+        try {
+                $produk->delete();
+            } catch (Exception $e) {
+                return back()->withError('Terjadi kesalahan.');
+            } catch (QueryException $e) {
+                return back()->withError('Terjadi kesalahan pada database.');
+            }
 
-        return redirect()->route('produk.index')->withStatus('Data berhasil dihapus.');
+            return redirect()->route('produk.index')->withStatus('Data berhasil dihapus.');
     }
 }

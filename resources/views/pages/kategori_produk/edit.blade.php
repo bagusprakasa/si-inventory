@@ -1,3 +1,4 @@
+
 @extends('layouts.template')
 @section('content')
     <div class="page-breadcrumb">

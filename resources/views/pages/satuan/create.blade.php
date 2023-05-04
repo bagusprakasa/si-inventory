@@ -34,7 +34,7 @@
                                 <div class="col-md-12">
                                     <input type="text" placeholder="Ex: Pcs" name="name"
                                         class="form-control form-control-line @error('name') is-invalid @enderror"
-                                        value="{{ old('name') }}"">
+                                        value="{{ old('name') }}">
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
