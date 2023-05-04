@@ -11,7 +11,7 @@
                             Dashboard</span></a></li>
                 <hr>
                 <h5>Barang Masuk</h5>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('barang-masuk.index') }}"
                         aria-expanded="false"><i class="fa-solid fa-list"></i> <span class="hide-menu">
                             List</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"

@@ -1,18 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
+use App\Http\Requests\BarangMasukRequest;
 
 class BarangMasukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = BarangMasuk::paginate(10);
+        if ($request->key) {
+            $data = BarangMasuk::where('name', $request->key)->paginate(10);
+        }
+        return view('pages.barang_masuk.list.index', compact('data'));
     }
 
     /**
