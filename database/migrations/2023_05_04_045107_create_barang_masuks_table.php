@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('barang_masuks', function (Blueprint $table) {
             $table->id();
+            $table->string('trx_no');
+            $table->date('date_in');
+            $table->longText('note')->nullable();
+            $table->unsignedBigInteger('guidedriver_id');
+            $table->double('total_qty', 14, 2);
+            $table->double('grand_total', 14, 2);
             $table->timestamps();
+            $table->foreign('guidedriver_id')->references('id')->on('guide_drivers');
         });
     }
 
