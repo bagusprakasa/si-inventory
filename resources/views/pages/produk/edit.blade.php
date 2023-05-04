@@ -26,15 +26,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material mx-2" action="{{ route('satuan.store') }}"
+                        <form class="form-horizontal form-material mx-2" action="{{ route('satuan.update', $data->id) }}"
                             method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label class="col-md-12">Nama Satuan</label>
                                 <div class="col-md-12">
                                     <input type="text" placeholder="Ex: Pcs" name="name"
                                         class="form-control form-control-line @error('name') is-invalid @enderror"
-                                        value="{{ old('name') }}">
+                                        value="{{ old('name', $data->name) }}"">
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}

@@ -32,13 +32,13 @@
                             <div class="form-group">
                                 <label class="col-md-12">Satuan Produk</label>
                                 <div class="col-md-12">
-                                    <select name="id_satuan[]" class="form-control select2" id="id_satuan1">
-                                    <option value=""></option>
+                                    <select name="id_satuan" class="form-control select2" id="id_satuan1">
+                                    <option value="">---Pilih Satuan---</option>
                                     @foreach ($satuans as $satuan)
                                         <option value="{{ $satuan->id }}">{{ $satuan->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('satuan_id')
+                                @error('id_satuan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -48,8 +48,8 @@
                             <div class="form-group">
                                 <label class="col-md-12">Kategori Produk</label>
                                 <div class="col-md-12">
-                                    <select name="id_kategori[]" class="form-control select2" id="id_kategori1">
-                                    <option value=""></option>
+                                    <select name="id_kategori" class="form-control select2" id="id_kategori1">
+                                    <option value="">---Pilih Kategori---</option>
                                     @foreach ($kategori as $kategoris)
                                         <option value="{{ $kategoris->id }}">{{ $kategoris->name }}</option>
                                     @endforeach
