@@ -18,7 +18,7 @@
                             Create</span></a></li>
                 <hr>
                 <h5>Barang Keluar</h5>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('barang-keluar.index') }}"
                         aria-expanded="false"><i class="fa-solid fa-list"></i> <span class="hide-menu">
                             List</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
@@ -36,6 +36,10 @@
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('produk.index') }}"
                         aria-expanded="false"><i class="fa-solid fa-box"></i> <span class="hide-menu">
                             Produk</span></a></li>
+                            Kategori Produk</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('guide-driver.index') }}"
+                        aria-expanded="false"><i class="fa-solid fa-box"></i> <span class="hide-menu">
+                            Guide/Driver</span></a></li>
                 <hr>
             </ul>
 

@@ -2,45 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KategoriProdukRequest;
-use App\Models\KategoriProduk;
+use App\Http\Requests\GuideDriverRequest;
+use App\Models\GuideDriver;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
-class KategoriProdukController extends Controller
+class GuideDriverController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $data = KategoriProduk::paginate(10);
+        $data = GuideDriver::paginate(10);
         if ($request->key) {
-            $data = KategoriProduk::where('name', $request->key)->paginate(10);
+            $data = GuideDriver::where('name', $request->key)->paginate(10);
         }
-        return view('pages.kategori_produk.index', compact('data'));
+        return view('pages.guide-driver.index', compact('data'));
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('pages.kategori_produk.create');
+        return view('pages.guide-driver.create');
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(KategoriProdukRequest $request)
+    public function store(GuideDriverRequest $request)
     {
         $request = $request->validated();
         try {
-            $model = new KategoriProduk();
+            $model = new GuideDriver();
             $model->name = $request['name'];
+            $model->type = $request['type'];
             $model->save();
         } catch (Exception $e) {
             return back()->withError('Terjadi kesalahan.');
@@ -48,13 +47,13 @@ class KategoriProdukController extends Controller
             return back()->withError('Terjadi kesalahan pada database.');
         }
 
-        return redirect()->route('kategori_produk.index')->withStatus('Data berhasil disimpan.');
+        return redirect()->route('guide-driver.index')->withStatus('Data berhasil disimpan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(KategoriProduk $kategoriProduk)
+    public function show(GuideDriver $guideDriver)
     {
         //
     }
@@ -62,44 +61,45 @@ class KategoriProdukController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KategoriProduk $kategoriProduk)
+    public function edit(GuideDriver $guideDriver)
     {
-        $data = $kategoriProduk;
-        return view('pages.kategori_produk.edit', compact('data'));
+        $data = $guideDriver;
+        return view('pages.guide-driver.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(KategoriProdukRequest $request, KategoriProduk $kategoriProduk)
+    public function update(GuideDriverRequest $request, GuideDriver $guideDriver)
     {
         $request = $request->validated();
         try {
-            $model = $kategoriProduk;
+            $model = $guideDriver;
             $model->name = $request['name'];
+            $model->type = $request['type'];
             $model->save();
         } catch (Exception $e) {
-            return back()->withError('Terjadi kesalahan.');
+            return back()->withError('Terjadi kesalahan.' .$e);
         } catch (QueryException $e) {
-            return back()->withError('Terjadi kesalahan pada database.');
+            return back()->withError('Terjadi kesalahan pada database.'.$e);
         }
 
-        return redirect()->route('kategori_produk.index')->withStatus('Data berhasil diubah.');
+        return redirect()->route('guide-driver.index')->withStatus('Data berhasil diubah.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KategoriProduk $kategoriProduk)
+    public function destroy(GuideDriver $guideDriver)
     {
         try {
-            $kategoriProduk->delete();
+            $guideDriver->delete();
         } catch (Exception $e) {
             return back()->withError('Terjadi kesalahan.');
         } catch (QueryException $e) {
             return back()->withError('Terjadi kesalahan pada database.');
         }
 
-        return redirect()->route('kategori_produk.index')->withStatus('Data berhasil dihapus.');
+        return redirect()->route('guide-driver.index')->withStatus('Data berhasil dihapus.');
     }
 }

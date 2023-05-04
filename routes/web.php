@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuideDriverController;
 use App\Http\Controllers\KategoriProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('satuan', SatuanController::class);
     Route::resource('produk', ProdukController::class);
+    Route::resource('barang-keluar', BarangKeluarController::class);
+    Route::resource('guide-driver', GuideDriverController::class);
     Route::resource('kategori_produk', KategoriProdukController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
