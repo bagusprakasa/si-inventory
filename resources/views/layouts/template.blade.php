@@ -24,7 +24,7 @@
             @yield('content')
             <!-- footer -->
             <footer class="footer text-center">
-                Semua Hak Dilindungi oleh Anak Magang. Dirancang dan Dikembangkan oleh <a href="#">Anak
+                {{-- Semua Hak Dilindungi oleh Anak Magang.  --}}Dirancang dan Dikembangkan oleh <a href="#">Anak
                     Magang</a>.
             </footer>
             <!-- End footer -->

@@ -54,7 +54,12 @@
                             width="31">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
+
+                        <form method="POST" action="{{ route('logout') }}" id="form-logout">
+                            @csrf
+                        </form>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="logout()"><i
+                                class="fas fa-sign-out m-r-5 m-l-5"></i>
                             Logout</a>
                     </ul>
                 </li>
