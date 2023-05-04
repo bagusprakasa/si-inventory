@@ -40,9 +40,8 @@
                         href="{{ route('produk.index') }}" aria-expanded="false"><i class="fa-solid fa-box"></i> <span
                             class="hide-menu">
                             Produk</span></a></li>
-                Kategori Produk</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route('guide-driver.index') }}" aria-expanded="false"><i class="fa-solid fa-box"></i>
+                        href="{{ route('guide-driver.index') }}" aria-expanded="false"><i class="fa-solid fa-users"></i>
                         <span class="hide-menu">
                             Guide/Driver</span></a></li>
                 <hr>
