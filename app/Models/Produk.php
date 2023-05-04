@@ -7,13 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
+    /**
+     * Get the satuan that owns the Produk
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function satuan()
     {
-        return $this->belongsTo('App\Satuan');
+        return $this->belongsTo(Satuan::class, 'satuan_id');
     }
+
+    /**
+     * Get the user that owns the Produk
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function kategori()
     {
-        return $this->belongsTo('App\Kategori');
+        return $this->belongsTo(KategoriProduk::class, 'kategori_id');
     }
 
 }

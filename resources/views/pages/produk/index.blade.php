@@ -66,8 +66,8 @@
                                         @foreach ($data as $item)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $item->satuan_id->name }}</td>
-                                                <td>{{ $item->kategori_id->name }}</td>
+                                                <td>{{ $item->satuan->name }}</td>
+                                                <td>{{ $item->kategori->name }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>
                                                     <a href="{{ route('produk.edit', $item->id) }}"
