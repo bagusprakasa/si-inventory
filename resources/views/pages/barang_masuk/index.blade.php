@@ -29,7 +29,7 @@
                         <!-- title -->
                         <div class="d-md-flex">
                             <div>
-                                <a href="" class="btn btn-primary">Tambah Data</a>
+                                <a href="{{  }}" class="btn btn-primary">Tambah Data</a>
                             </div>
                             <div class="ms-auto">
                                 <form action="" method="GET">
