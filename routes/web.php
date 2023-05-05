@@ -9,6 +9,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\GuideDriverController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\KategoriProdukController;
+use App\Http\Controllers\VendorController;
 
 /*
 |--------------------------------------------------------------------------

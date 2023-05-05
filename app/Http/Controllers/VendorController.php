@@ -10,9 +10,13 @@ class VendorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Vendor::paginate(10);
+        if ($request->key) {
+            $data = Vendor::where('name', $request->key)->paginate(10);
+        }
+        return view('pages.vendor.index', compact('data'));
     }
 
     /**
@@ -20,7 +24,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.vendor.create');
     }
 
     /**

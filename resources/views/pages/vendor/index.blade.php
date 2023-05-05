@@ -29,7 +29,7 @@
                         <!-- title -->
                         <div class="d-md-flex">
                             <div>
-                                <a href="{{ route('satuan.create') }}" class="btn btn-primary">Tambah Data</a>
+                                <a href="{{ route('vendor.create') }}" class="btn btn-primary">Tambah Data</a>
                             </div>
                             <div class="ms-auto">
                                 <form action="" method="GET">
@@ -66,11 +66,11 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('satuan.edit', $item->id) }}"
+                                                    <a href="{{ route('vendor.edit', $item->id) }}"
                                                         class="btn btn-success btn-sm text-white">Edit</a>
                                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
                                                         onclick="hapus({{ $item->id }})">Hapus</a>
-                                                    <form action="{{ route('satuan.destroy', $item->id) }}" method="post"
+                                                    <form action="{{ route('vendor.destroy', $item->id) }}" method="post"
                                                         id="delete">
                                                         @csrf
                                                         @method('delete')
