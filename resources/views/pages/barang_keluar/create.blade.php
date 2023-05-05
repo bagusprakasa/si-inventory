@@ -30,7 +30,7 @@
                             method="POST">
                             @csrf
                             <div class="form-group">
-                                <label class="col-md-12">Nama</label>
+                                <label class="col-md-12">Nama Barang</label>
                                 <div class="col-md-12">
                                     <input type="text" placeholder="Ex: minuman" name="name"
                                         class="form-control form-control-line @error('name') is-invalid @enderror"
