@@ -29,7 +29,7 @@
                         <!-- title -->
                         <div class="d-md-flex">
                             <div>
-                                <a href="{{ route('kategori_produk.create') }}" class="btn btn-primary">Tambah Data</a>
+                                <a href="{{ route('barang-keluar.create') }}" class="btn btn-primary">Tambah Data</a>
                             </div>
                             <div class="ms-auto">
                                 <form action="" method="GET">

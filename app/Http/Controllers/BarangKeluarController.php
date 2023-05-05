@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BarangKeluarRequest;
 use App\Models\BarangKeluar;
+use App\Models\GuideDriver;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        return view('pages.barang_keluar.create');
+        $guidedriver = GuideDriver::get();
+        return view('pages.barang_keluar.create', compact("guidedriver"));
     }
 
     /**
