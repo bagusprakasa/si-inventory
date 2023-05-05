@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BarangKeluarRequest;
-use App\Models\BarangKeluar;
-use App\Models\GuideDriver;
-use Exception;
-use Illuminate\Database\QueryException;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
-class BarangKeluarController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $data = BarangKeluar::paginate(10);
+        $data = Vendor::paginate(10);
         if ($request->key) {
-            $data = BarangKeluar::where('name', $request->key)->paginate(10);
+            $data = Vendor::where('name', $request->key)->paginate(10);
         }
-        return view('pages.barang_keluar.index', compact('data'));
+        return view('pages.vendor.index', compact('data'));
     }
 
     /**
@@ -28,8 +24,7 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        $guidedriver = GuideDriver::get();
-        return view('pages.barang_keluar.create', compact("guidedriver"));
+        return view('pages.vendor.create');
     }
 
     /**
@@ -43,7 +38,7 @@ class BarangKeluarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BarangKeluar $barangKeluar)
+    public function show(Vendor $vendor)
     {
         //
     }
@@ -51,7 +46,7 @@ class BarangKeluarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BarangKeluar $barangKeluar)
+    public function edit(Vendor $vendor)
     {
         //
     }
@@ -59,7 +54,7 @@ class BarangKeluarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BarangKeluar $barangKeluar)
+    public function update(Request $request, Vendor $vendor)
     {
         //
     }
@@ -67,7 +62,7 @@ class BarangKeluarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BarangKeluar $barangKeluar)
+    public function destroy(Vendor $vendor)
     {
         //
     }

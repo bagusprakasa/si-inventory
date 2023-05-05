@@ -9,6 +9,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\GuideDriverController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\KategoriProdukController;
+use App\Http\Controllers\VendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('barang-masuk', BarangMasukController::class);
     Route::resource('guide-driver', GuideDriverController::class);
     Route::resource('kategori_produk', KategoriProdukController::class);
+    Route::resource('vendor', VendorController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

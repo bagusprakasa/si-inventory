@@ -5,15 +5,15 @@
             <div class="col-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
-                        <li class="breadcrumb-item"><a href="{{ url('kategori_produk') }}" class="link"><i
+                        <li class="breadcrumb-item"><a href="{{ url('satuan') }}" class="link"><i
                                     class="fa-solid fa-box-open"></i></a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('kategori_produk') }}"
+                        <li class="breadcrumb-item"><a href="{{ url('satuan') }}"
                                 class="link">{{ ucwords(Request::segment(1)) }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
                             {{ Request::segment(2) != null ? ucwords(Request::segment(2)) : 'List' }}</li>
                     </ol>
                 </nav>
-                <h1 class="mb-0 fw-bold">Barang Keluar</h1>
+                <h1 class="mb-0 fw-bold">{{ ucwords(Request::segment(1)) }}</h1>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                         <!-- title -->
                         <div class="d-md-flex">
                             <div>
-                                <a href="{{ route('barang-keluar.create') }}" class="btn btn-primary">Tambah Data</a>
+                                <a href="{{ route('vendor.create') }}" class="btn btn-primary">Tambah Data</a>
                             </div>
                             <div class="ms-auto">
                                 <form action="" method="GET">
@@ -52,29 +52,25 @@
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">No</th>
-                                        <th class="border-top-0">No Transaksi</th>
-                                        <th class="border-top-0">Tanggal Transaksi</th>
-                                        <th class="border-top-0">Jumlah Kuantitas Barang</th>
-                                        <th class="border-top-0">Grand Total</th>
-                                        <th class="border-top-0">Catatan</th>
+                                        <th class="border-top-0">Nama</th>
                                         <th class="border-top-0">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php
-                                        $id = 1;
+                                        $no = 1;
                                     @endphp
                                     @if (count($data) != 0)
                                         @foreach ($data as $item)
                                             <tr>
-                                                <td>{{ $id++ }}</td>
+                                                <td>{{ $no++ }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('kategori_produk.edit', $item->id) }}"
+                                                    <a href="{{ route('vendor.edit', $item->id) }}"
                                                         class="btn btn-success btn-sm text-white">Edit</a>
                                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
                                                         onclick="hapus({{ $item->id }})">Hapus</a>
-                                                    <form action="{{ route('kategori_produk.destroy', $item->id) }}" method="post"
+                                                    <form action="{{ route('vendor.destroy', $item->id) }}" method="post"
                                                         id="delete">
                                                         @csrf
                                                         @method('delete')

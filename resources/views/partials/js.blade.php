@@ -14,10 +14,10 @@
     <!--chartis chart-->
     <script src="{{ asset('') }}libs/chartist/dist/chartist.min.js"></script>
     <script src="{{ asset('') }}libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="{{ asset('') }}js/pages/dashboards/dashboard1.js"></script>
+    {{-- <script src="{{ asset('') }}js/pages/dashboards/dashboard1.js"></script> --}}
     <script src="
-                                https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
-                                "></script>
+                                            https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+                                            "></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {

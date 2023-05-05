@@ -44,6 +44,10 @@
                         href="{{ route('guide-driver.index') }}" aria-expanded="false"><i class="fa-solid fa-users"></i>
                         <span class="hide-menu">
                             Guide/Driver</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('vendor.index') }}" aria-expanded="false"><i class="fa-solid fa-users"></i>
+                        <span class="hide-menu">
+                            Vendor</span></a></li>
                 <hr>
             </ul>
 
