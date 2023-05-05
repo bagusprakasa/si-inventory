@@ -24,7 +24,7 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.barang_masuk.create.create');
     }
 
     /**
