@@ -68,10 +68,9 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Keterangan </label>
                                     <div class="col-md-12">
-                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                        {{-- <input type="text" placeholder="Masukkan nama guide atau driver" name="name"
-                                            class="form-control form-control-line @error('name') is-invalid @enderror"
-                                            value="{{ old('name') }}""> --}}
+                                        <textarea class="form-control-line @error('name') is-invalid @enderror"
+                                        value="{{ old('name') }}" name="name"
+                                        placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px">   </textarea>
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
