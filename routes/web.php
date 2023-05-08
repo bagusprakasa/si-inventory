@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('satuan', SatuanController::class);
     Route::resource('produk', ProdukController::class);
     Route::get('/ajax-barang-keluar', [BarangKeluarController::class, 'ajaxSelect']);
+    Route::get('/ajax-barang-masuk', [BarangMasukController::class, 'ajaxSelect']);
     Route::resource('barang-keluar', BarangKeluarController::class);
     Route::resource('barang-masuk', BarangMasukController::class);
     Route::resource('guide-driver', GuideDriverController::class);

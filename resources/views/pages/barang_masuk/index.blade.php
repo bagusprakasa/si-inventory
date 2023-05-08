@@ -22,57 +22,8 @@
     <div class="container-fluid">
         <!-- Table -->
         <div class="row">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label class="col-md-12">Penanggung Jawab</label>
-                        <div class="col-md-12">
-                            <select name="id_guidedriver" class="form-control select2" id="id_guidedriver">
-                            <option value="">---Pilih Penanggung Jawab---</option>
-                            @foreach ($guidedriver as $guidedrivers)
-                                <option value="{{ $guidedrivers->id }}">{{ $guidedrivers->name }}</option>
-                            @endforeach
-                        </select>
-                            @error('id_guidedriver')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Tanggal Trip </label>
-                        <div class="col-md-12">
-                            <input type="date" placeholder="" name="date"
-                                class="form-control form-control-line @error('date') is-invalid @enderror"
-                                value="{{ old('date') }}"">
-                            @error('date')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="form-group">
-                        <label class="col-md-12">Keterangan </label>
-                        <div class="col-md-12">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            {{-- <input type="text" placeholder="Masukkan nama guide atau driver" name="name"
-                                class="form-control form-control-line @error('name') is-invalid @enderror"
-                                value="{{ old('name') }}""> --}}
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+           
             <!-- column -->
             <div class="col-12">
                 <div class="card">

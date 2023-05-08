@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\BarangMasuk;
 use Exception;
+use App\Models\Produk;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\GuideDriver;
@@ -30,7 +31,9 @@ class BarangMasukController extends Controller
     public function create()
     {
         $guidedriver = GuideDriver::get();
-        return view('pages.barang_masuk.create', compact("guidedriver"));
+        $countItem = is_array(old('barang')) ? count(old('barang')) : 1;
+        $barang = Produk::get();
+        return view('pages.barang_masuk.create', compact("guidedriver", 'countItem', 'barang'));
     }
 
     /**
@@ -38,6 +41,26 @@ class BarangMasukController extends Controller
      */
     public function store(BarangMasukRequest $request)
     {
+
+        $request = $request->validated();
+        try {
+            $model = new BarangMasuk();
+            $model->guidedriver_id = $request['id_guidedriver'];
+            $model->save();
+        } catch (Exception $e) {
+            // return back()->withError('Terjadi kesalahan.');
+            return $e;
+        } catch (QueryException $e) {
+            return $e;
+            // return back()->withError('Terjadi kesalahan pada database.');
+        }
+
+        return redirect()->route('barang_masuk.index')->withStatus('Data berhasil disimpan.');
+
+
+
+
+
         // $request = $request->validated();
         // try {
         //     $model = new BarangMasuk();
@@ -86,5 +109,12 @@ class BarangMasukController extends Controller
     public function destroy(BarangMasuk $barangMasuk)
     {
         //
+    }
+    public function ajaxSelect(Request $request)
+    {
+        $i = $request->no;
+        $no = $request->no+1;
+        $barangs = Produk::get();
+        return view('pages.barang_masuk.tr', compact('i','no','barangs'));
     }
 }
