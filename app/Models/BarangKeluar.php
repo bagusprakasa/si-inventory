@@ -9,3 +9,4 @@ class BarangKeluar extends Model
 {
     use HasFactory;
 }
+6666666666666666666666666666666666
