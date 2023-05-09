@@ -74,12 +74,12 @@
                                                 <td>{{ $item->trx_no }}</td>
                                                 <td>{{ $item->date_in}}</td>
                                                 <td>{{ $item->note }}</td>
-                                                <td>{{ $item->guidedriver_id}}</td>
+                                                <td>{{ $item->guide_driver->name}}</td>
                                                 <td>{{ $item->total_qty}}</td>
-                                                <td>{{ $item->grand_total}}</td>
+                                                <td>{{ number_format($item->grand_total, 0, ',', '.')}}</td>
                                                 <td>
-                                                    <a href="{{ route('barang-masuk.edit', $item->id) }}"
-                                                        class="btn btn-success btn-sm text-white">Edit</a>
+                                                    <a href="#"
+                                                        class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="detail({{$item->id}})" >Detail</a>
                                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
                                                         onclick="hapus({{ $item->id }})">Hapus</a>
                                                     <form action="{{ route('barang-masuk.destroy', $item->id) }}" method="post"
@@ -109,6 +109,36 @@
         </div>
         <!-- Table -->
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table mb-0 table-hover align-middle text-nowrap">
+                <thead>
+                <tr>
+                    <th>Nama Barang</th>
+                    <th>Kuantitas</th>
+                    <th>Harga Barang</th>
+                    <th>Subtotal</th>
+                </tr>
+                </thead>
+                <tbody id="modal-detail">
+
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- End Container fluid  -->
     <script src="
                                 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
@@ -129,6 +159,31 @@
                 }
             })
         }
+
+function detail(id) {
+    $('#modal-detail').empty();
+    $.ajax({
+        type: "get",
+        url: "{{url('barang-masuk')}}/"+id,
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            $.each(response, function (i, v) {
+                $('#modal-detail').append(
+                    `
+                    <tr>
+                        <td>${v.produk.name}</td>
+                        <td>${parseFloat(v.qty)}</td>
+                        <td>${parseFloat(v.subtotal)/parseFloat(v.qty)}</td>
+                        <td>${parseFloat(v.subtotal)}</td>
+                    </tr>
+                    `
+                );
+            });
+        }
+    });
+  }
+
     </script>
     @if (session('status'))
         <script>

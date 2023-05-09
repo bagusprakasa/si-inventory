@@ -21,9 +21,9 @@ class BarangMasukController extends Controller
     public function index(Request $request)
     {
         $guidedriver = GuideDriver::get();
-        $data = BarangMasuk::paginate(10);
+        $data = BarangMasuk::with('guide_driver')->paginate(10);
         if ($request->key) {
-            $data = BarangMasuk::where('name', $request->key)->paginate(10);
+            $data = BarangMasuk::with('guide_driver')->where('name', $request->key)->paginate(10);
         }
         return view('pages.barang_masuk.index', compact('data','guidedriver'));
     }
@@ -105,7 +105,7 @@ class BarangMasukController extends Controller
      */
     public function show(BarangMasuk $barangMasuk)
     {
-        //
+        return DetailBarangMasuk::with('produk')->where('barang_masuk_id', $barangMasuk->id)->get();
     }
 
     /**
