@@ -52,10 +52,10 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Tanggal Trip </label>
                                         <div class="col-md-12">
-                                            <input type="date" placeholder="" name="name"
-                                                class="form-control form-control-line @error('name') is-invalid @enderror"
-                                                value="{{ old('name') }}"">
-                                            @error('name')
+                                            <input type="date" placeholder="" name="date_out"
+                                                class="form-control form-control-line @error('date_out') is-invalid @enderror"
+                                                value="{{ old('date_out') }}"">
+                                            @error('date_out')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>

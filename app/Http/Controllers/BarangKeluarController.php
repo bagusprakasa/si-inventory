@@ -41,7 +41,7 @@ class BarangKeluarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BarangKeluarRequest $request)
     {
         $validated = $request->validated();
         DB::beginTransaction();
@@ -49,7 +49,7 @@ class BarangKeluarController extends Controller
             $model = new BarangKeluar();
             $model->trx_no = 'INV/'.Carbon::now()->format('Y/m/d').time();
             $model->guidedriver_id = $validated['id_guidedriver'];
-            $model->date_in = $validated['date_in'];
+            $model->date_out = $validated['date_out'];
             $model->note = $request->note;
             $model->total_qty = $request->total_qty;
             $model->grand_total = $request->grand_total;
@@ -57,7 +57,7 @@ class BarangKeluarController extends Controller
 
             foreach ($request->get('barang') as $key => $value) {
                 $detailPesananbarangkeluar = new DetailBarangKeluar();
-                $detailPesananbarangkeluar->barang_masuk_id = $model->id;
+                $detailPesananbarangkeluar->barang_keluar_id = $model->id;
                 $detailPesananbarangkeluar->item_id = $value;
                 $detailPesananbarangkeluar->qty = $request->get('qty')[$key];
                 $detailPesananbarangkeluar->subtotal = $request->get('subtotal')[$key];

@@ -65,24 +65,28 @@
                                         $id = 1;
                                     @endphp
                                     @if (count($data) != 0)
-                                        @foreach ($data as $item)
-                                            <tr>
-                                                <td>{{ $id++ }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>
-                                                    <a href="{{ route('kategori_produk.edit', $item->id) }}"
-                                                        class="btn btn-success btn-sm text-white">Edit</a>
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
-                                                        onclick="hapus({{ $item->id }})">Hapus</a>
-                                                    <form action="{{ route('kategori_produk.destroy', $item->id) }}" method="post"
-                                                        id="delete">
-                                                        @csrf
-                                                        @method('delete')
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $id++ }}</td>
+                                            <td>{{ $item->trx_no }}</td>
+                                            <td>{{ $item->date_out}}</td>
+                                            <td>{{ $item->note }}</td>
+                                            <td>{{ $item->guidedriver_id}}</td>
+                                            <td>{{ $item->total_qty}}</td>
+                                            <td>{{ $item->grand_total}}</td>
+                                            <td>
+
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
+                                                    onclick="hapus({{ $item->id }})">Hapus</a>
+                                                <form action="{{ route('barang-keluar.destroy', $item->id) }}" method="post"
+                                                    id="delete">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                         <tr>
                                             <td colspan="3" class="text-center">
                                                 <h3>Tidak ada data.</h3>
