@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Penanggung Jawab</label>
                                     <div class="col-md-12">
-                                        <select name="id_guidedriver" class="form-control select2" id="id_guidedriver">
+                                        <select name="id_guidedriver" class="form-control select2 @error('id_guidedriver') is-invalid @enderror" id="id_guidedriver">
                                         <option value="">---Pilih Penanggung Jawab---</option>
                                         @foreach ($guidedriver as $guidedrivers)
                                             <option value="{{ $guidedrivers->id }}">{{ $guidedrivers->name }}</option>
@@ -53,10 +53,10 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Tanggal Trip </label>
                                     <div class="col-md-12">
-                                        <input type="date" placeholder="" name="date"
-                                            class="form-control form-control-line @error('date') is-invalid @enderror"
-                                            value="{{ old('date') }}"">
-                                        @error('date')
+                                        <input type="date" placeholder="" name="date_in"
+                                            class="form-control form-control-line @error('date_in') is-invalid @enderror"
+                                            value="{{ old('date_in') }}"">
+                                        @error('date_in')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -69,15 +69,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Keterangan </label>
                                     <div class="col-md-12">
-                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                        {{-- <input type="text" placeholder="Masukkan nama guide atau driver" name="name"
-                                            class="form-control form-control-line @error('name') is-invalid @enderror"
-                                            value="{{ old('name') }}""> --}}
-                                        @error('name')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="note"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +80,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-hover align-middle text-nowrap">
+                            <table class="table mb-0 table-hover align-middle text-nowrap" id="table-barang-masuk">
                                 <thead>
                                     <tr>
                                         <th class="border-top-0"></th>
@@ -109,6 +101,17 @@
                                         @include('pages.barang_masuk.tr', ['no' => $no, 'i' => $i, 'barangs' => $barang])
                                     @endfor
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td>
+                                            <input type="number" id="total_qty" name="total_qty" value="0" class="form-control" readonly>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="grandtotal" name="grand_total" value="0" class="form-control" readonly>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 
@@ -148,6 +151,26 @@
         function removeTr(no) {
             var selector = '.row-item[data-no="' + no + '"]';
             $(selector).remove()
+            grandtotal()
          }
+
+         function subtotal(no) {
+            var harga = $('#harga'+no).val();
+            var qty = $('#qty'+no).val();
+            $('#subtotal'+no).val(parseInt(harga*qty))
+            grandtotal()
+          }
+
+         function grandtotal() {
+            var table = document.getElementById("table-barang-masuk");
+            var tbodyRowCount = table.tBodies[0].rows.length;
+            var total_qty = 0;
+            var grandtotal = 0;
+            $('.subtotal').each(function () {
+                grandtotal += parseInt($(this).val())
+            });
+            $('#grandtotal').val(grandtotal);
+            $('#total_qty').val(tbodyRowCount);
+          }
     </script>
     @endpush

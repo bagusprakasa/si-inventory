@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use App\Models\GuideDriver;
 
 use App\Http\Requests\BarangMasukRequest;
+use App\Models\DetailBarangMasuk;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class BarangMasukController extends Controller
 {
@@ -41,21 +44,39 @@ class BarangMasukController extends Controller
      */
     public function store(BarangMasukRequest $request)
     {
-
-        $request = $request->validated();
+        $validated = $request->validated();
+        DB::beginTransaction();
         try {
             $model = new BarangMasuk();
-            $model->guidedriver_id = $request['id_guidedriver'];
+            $model->trx_no = 'INV/'.Carbon::now()->format('Y/m/d').time();
+            $model->guidedriver_id = $validated['id_guidedriver'];
+            $model->date_in = $validated['date_in'];
+            $model->note = $request->note;
+            $model->total_qty = $request->total_qty;
+            $model->grand_total = $request->grand_total;
             $model->save();
+
+            foreach ($request->get('barang') as $key => $value) {
+                $detailPesananbarangmasuk = new DetailBarangMasuk();
+                $detailPesananbarangmasuk->barang_masuk_id = $model->id;
+                $detailPesananbarangmasuk->item_id = $value;
+                $detailPesananbarangmasuk->qty = $request->get('qty')[$key];
+                $detailPesananbarangmasuk->subtotal = $request->get('subtotal')[$key];
+
+                $detailPesananbarangmasuk->save();
+            }
         } catch (Exception $e) {
+            DB::rollback();
             // return back()->withError('Terjadi kesalahan.');
             return $e;
         } catch (QueryException $e) {
+            DB::rollback();
             return $e;
             // return back()->withError('Terjadi kesalahan pada database.');
         }
+        DB::commit();
 
-        return redirect()->route('barang_masuk.index')->withStatus('Data berhasil disimpan.');
+        return redirect()->route('barang-masuk.index')->withStatus('Data berhasil disimpan.');
 
 
 

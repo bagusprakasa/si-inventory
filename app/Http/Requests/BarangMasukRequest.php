@@ -15,21 +15,25 @@ class BarangMasukRequest extends FormRequest
         return Auth::check();
 
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
-    //  * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-    //  */
-    // public function rules(): array
-    // {
-    //     return [
-    //         return [
-    //             'name' => 'required',
-    //             'id_satuan' => 'required',
-    //             'id_kategori' => 'required',
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'id_guidedriver' => ['required'],
+            'date_in' => ['required'],
+            // 'total_qty' => ['required'],
+            // 'grand_total' => ['required'],
+        ];
+    }
 
-    //         ];
-    //     ];
-    // }
+    public function messages(): array
+      {
+          return [
+              'required' => ':attribute harus diisi.',
+          ];
+      }
 }

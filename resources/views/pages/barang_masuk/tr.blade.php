@@ -15,12 +15,12 @@
         </select>
     </td>
     <td>
-        <input type="number" name="harga[]" class="form-control">
+        <input type="number" name="harga[]" class="form-control harga" id="harga{{$no}}" value="0" onkeyup="subtotal({{$no}})">
     </td>
     <td>
-        <input type="number" name="qty[]" class="form-control">
+        <input type="number" name="qty[]" class="form-control qty" value="0" id="qty{{$no}}" onkeyup="subtotal({{$no}})">
     </td>
     <td>
-        <input type="number" name="subtotal[]" class="form-control">
+        <input type="number" name="subtotal[]" class="form-control subtotal" id="subtotal{{$no}}" value="0" readonly>
     </td>
 </tr>

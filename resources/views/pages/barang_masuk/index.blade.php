@@ -23,7 +23,7 @@
         <!-- Table -->
         <div class="row">
         </div>
-           
+
             <!-- column -->
             <div class="col-12">
                 <div class="card">
@@ -54,10 +54,12 @@
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">No</th>
-                                        <th class="border-top-0">Nama Barang</th>
-                                        <th class="border-top-0">Harga Barang</th>
-                                        <th class="border-top-0">Kuantitas Barang</th>
-                                        <th class="border-top-0">Sub Total</th>
+                                        <th class="border-top-0">Nomor Transaksi</th>
+                                        <th class="border-top-0">Tanggal Masuk</th>
+                                        <th class="border-top-0">Catatan</th>
+                                        <th class="border-top-0">Penanggung Jawab</th>
+                                        <th class="border-top-0">Total Barang</th>
+                                        <th class="border-top-0">Grandtotal</th>
                                         <th class="border-top-0">Aksi</th>
                                     </tr>
                                 </thead>
@@ -76,11 +78,11 @@
                                                 <td>{{ $item->total_qty}}</td>
                                                 <td>{{ $item->grand_total}}</td>
                                                 <td>
-                                                    <a href="{{ route('barang_masuk.list.edit', $item->id) }}"
+                                                    <a href="{{ route('barang-masuk.edit', $item->id) }}"
                                                         class="btn btn-success btn-sm text-white">Edit</a>
                                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
                                                         onclick="hapus({{ $item->id }})">Hapus</a>
-                                                    <form action="{{ route('barang_masuk.destroy', $item->id) }}" method="post"
+                                                    <form action="{{ route('barang-masuk.destroy', $item->id) }}" method="post"
                                                         id="delete">
                                                         @csrf
                                                         @method('delete')
