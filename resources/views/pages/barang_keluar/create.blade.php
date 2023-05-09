@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                                 <div class="table-responsive">
-                                    <table class="table mb-0 table-hover align-middle text-nowrap">
+                                    <table class="table mb-0 table-hover align-middle text-nowrap" id="table-barang-keluar">
                                         <thead>
                                             <tr>
                                                 <th class="border-top-0"></th>
@@ -107,6 +107,17 @@
                                                 @include('pages.barang_keluar.tr', ['no' => $no, 'i' => $i, 'barangs' => $barang])
                                             @endfor
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                                <td>
+                                                    <input type="number" id="total_qty" name="total_qty" value="0" class="form-control" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="number" id="grandtotal" name="grand_total" value="0" class="form-control" readonly>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -144,5 +155,25 @@
             var selector = '.row-item[data-no="' + no + '"]';
             $(selector).remove()
          }
+
+         function subtotal(no) {
+            var harga = $('#harga'+no).val();
+            var qty = $('#qty'+no).val();
+            $('#subtotal'+no).val(parseInt(harga*qty))
+            grandtotal()
+          }
+
+         function grandtotal() {
+            var table = document.getElementById("table-barang-keluar");
+            var tbodyRowCount = table.tBodies[0].rows.length;
+            var total_qty = 0;
+            var grandtotal = 0;
+            $('.subtotal').each(function () {
+                grandtotal += parseInt($(this).val())
+            });
+            $('#grandtotal').val(grandtotal);
+            $('#total_qty').val(tbodyRowCount);
+          }
+
     </script>
 @endpush
