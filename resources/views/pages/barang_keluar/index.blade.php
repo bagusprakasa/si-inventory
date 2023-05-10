@@ -52,11 +52,12 @@
                                 <thead>
                                     <tr>
                                         <th class="border-top-0">No</th>
-                                        <th class="border-top-0">No Transaksi</th>
-                                        <th class="border-top-0">Tanggal Transaksi</th>
-                                        <th class="border-top-0">Jumlah Kuantitas Barang</th>
-                                        <th class="border-top-0">Grand Total</th>
+                                        <th class="border-top-0">Nomor Transaksi</th>
+                                        <th class="border-top-0">Tanggal Masuk</th>
                                         <th class="border-top-0">Catatan</th>
+                                        <th class="border-top-0">Penanggung Jawab</th>
+                                        <th class="border-top-0">Total Barang</th>
+                                        <th class="border-top-0">Grandtotal</th>
                                         <th class="border-top-0">Aksi</th>
                                     </tr>
                                 </thead>
@@ -71,11 +72,12 @@
                                             <td>{{ $item->trx_no }}</td>
                                             <td>{{ $item->date_out}}</td>
                                             <td>{{ $item->note }}</td>
-                                            <td>{{ $item->guidedriver_id}}</td>
+                                            <td>{{ $item->guide_driver->name}}</td>
                                             <td>{{ $item->total_qty}}</td>
-                                            <td>{{ $item->grand_total}}</td>
+                                            <td>{{ number_format($item->grand_total, 0, ',', '.')}}</td>
                                             <td>
-
+                                                <a href="#"
+                                                class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="detail({{$item->id}})" >Detail</a>
                                                 <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
                                                     onclick="hapus({{ $item->id }})">Hapus</a>
                                                 <form action="{{ route('barang-keluar.destroy', $item->id) }}" method="post"
@@ -103,6 +105,35 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <table class="table mb-0 table-hover align-middle text-nowrap">
+                    <thead>
+                    <tr>
+                        <th>Nama Barang</th>
+                        <th>Kuantitas</th>
+                        <th>Harga Barang</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody id="modal-detail">
+
+                    </tbody>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
         <!-- Table -->
     </div>
     <!-- End Container fluid  -->
@@ -125,6 +156,30 @@
                 }
             })
         }
+
+        function detail(id) {
+    $('#modal-detail').empty();
+    $.ajax({
+        type: "get",
+        url: "{{url('barang-keluar')}}/"+id,
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            $.each(response, function (i, v) {
+                $('#modal-detail').append(
+                    `
+                    <tr>
+                        <td>${v.produk.name}</td>
+                        <td>${parseFloat(v.qty)}</td>
+                        <td>${parseFloat(v.subtotal)/parseFloat(v.qty)}</td>
+                        <td>${parseFloat(v.subtotal)}</td>
+                    </tr>
+                    `
+                );
+            });
+        }
+    });
+  }
     </script>
     @if (session('status'))
         <script>

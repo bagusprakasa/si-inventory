@@ -20,9 +20,10 @@ class BarangKeluarController extends Controller
      */
     public function index(Request $request)
     {
-        $data = BarangKeluar::paginate(10);
+        $guidedriver = GuideDriver::get();
+        $data = BarangKeluar::with('guide_driver')->paginate(10);
         if ($request->key) {
-            $data = BarangKeluar::where('name', $request->key)->paginate(10);
+            $data = BarangKeluar::with('guide_driver')->where('name', $request->key)->paginate(10);
         }
         return view('pages.barang_keluar.index', compact('data'));
     }
@@ -83,7 +84,7 @@ class BarangKeluarController extends Controller
      */
     public function show(BarangKeluar $barangKeluar)
     {
-        //
+        return DetailBarangKeluar::with('produk')->where('barang_masuk_id', $barangKeluar ->id)->get();
     }
 
     /**

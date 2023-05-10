@@ -173,9 +173,7 @@
             });
             $('#grandtotal').val(grandtotal);
             $('#total_qty').val(tbodyRowCount);
-            const formatRupiah = (money) => {
-       
-          }
 
+        }
     </script>
 @endpush
