@@ -184,7 +184,7 @@ function detail(id) {
         url: "{{url('barang-masuk')}}/"+id,
         dataType: "json",
         success: function (response) {
-            console.log(response);
+            ,
             $.each(response, function (i, v) {
                 $('#modal-detail').append(
                     `
