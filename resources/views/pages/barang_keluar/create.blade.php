@@ -68,10 +68,10 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Keterangan </label>
                                         <div class="col-md-12">
-                                            <textarea class="form-control @error('name') is-invalid @enderror"
-                                            value="{{ old('name') }}" name="name"
+                                            <textarea class="form-control @error('note') is-invalid @enderror"
+                                            value="{{ old('note') }}" name="note"
                                             placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px">   </textarea>
-                                            @error('name')
+                                            @error('note')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
