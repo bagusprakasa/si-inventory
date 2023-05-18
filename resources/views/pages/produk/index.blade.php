@@ -55,6 +55,7 @@
                                         <th class="border-top-0">satuan produk</th>
                                         <th class="border-top-0">kategori produk</th>
                                         <th class="border-top-0">Nama</th>
+                                        <th class="border-top-0">Stok</th>
                                         <th class="border-top-0">Aksi</th>
                                     </tr>
                                 </thead>
@@ -69,6 +70,7 @@
                                                 <td>{{ $item->satuan->name }}</td>
                                                 <td>{{ $item->kategori->name }}</td>
                                                 <td>{{ $item->name }}</td>
+                                                <td>{{ $item->stok[0]->stok }}</td>
                                                 <td>
                                                     <a href="{{ route('produk.edit', $item->id) }}"
                                                         class="btn btn-success btn-sm text-white">Edit</a>
@@ -103,8 +105,8 @@
     </div>
     <!-- End Container fluid  -->
     <script src="
-                                https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
-                                "></script>
+                                            https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+                                            "></script>
     <script>
         function hapus(id) {
             Swal.fire({

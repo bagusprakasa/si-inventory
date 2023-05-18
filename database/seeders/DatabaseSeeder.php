@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CategoryProductSeeder::class,
             SatuanSeeder::class,
             ProductSeeder::class,
+            StokProdukSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

@@ -6,6 +6,7 @@ use App\Models\KategoriProduk;
 use App\Http\Requests\RequestProduk;
 use App\Models\Produk;
 use App\Models\Satuan;
+use App\Models\StokProduk;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -17,9 +18,9 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Produk::with('satuan','kategori')->paginate(10);
+        $data = Produk::with('satuan', 'kategori', 'stok')->paginate(10);
         if ($request->key) {
-            $data = Produk::with('satuan','kategori')->where('name', $request->key)->paginate(10);
+            $data = Produk::with('satuan', 'kategori', 'stok')->where('name', $request->key)->paginate(10);
         }
         return view('pages.produk.index', compact('data'));
     }
@@ -31,7 +32,7 @@ class ProdukController extends Controller
     {
         $satuans = Satuan::get();
         $kategori = KategoriProduk::get();
-        return view('pages.produk.create', compact('satuans','kategori'));
+        return view('pages.produk.create', compact('satuans', 'kategori'));
     }
 
     /**
@@ -47,6 +48,11 @@ class ProdukController extends Controller
             $model->kategori_id = $request['id_kategori'];
             $model->name = $request['name'];
             $model->save();
+
+            $stokModel = new StokProduk();
+            $stokModel->produk_id = $model->id;
+            $stokModel->stok = 0;
+            $stokModel->save();
         } catch (Exception $e) {
             // return back()->withError('Terjadi kesalahan.');
             return $e;
@@ -74,7 +80,7 @@ class ProdukController extends Controller
         $satuans = Satuan::get();
         $kategori = KategoriProduk::get();
         $data = $produk;
-        return view('pages.produk.edit', compact('data','satuans','kategori'));
+        return view('pages.produk.edit', compact('data', 'satuans', 'kategori'));
     }
 
     /**
@@ -104,13 +110,13 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         try {
-                $produk->delete();
-            } catch (Exception $e) {
-                return back()->withError('Terjadi kesalahan.');
-            } catch (QueryException $e) {
-                return back()->withError('Terjadi kesalahan pada database.');
-            }
+            $produk->delete();
+        } catch (Exception $e) {
+            return back()->withError('Terjadi kesalahan.');
+        } catch (QueryException $e) {
+            return back()->withError('Terjadi kesalahan pada database.');
+        }
 
-            return redirect()->route('produk.index')->withStatus('Data berhasil dihapus.');
+        return redirect()->route('produk.index')->withStatus('Data berhasil dihapus.');
     }
 }

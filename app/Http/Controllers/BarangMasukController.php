@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\BarangMasuk;
 use Exception;
 use App\Models\Produk;
@@ -10,6 +11,7 @@ use App\Models\GuideDriver;
 
 use App\Http\Requests\BarangMasukRequest;
 use App\Models\DetailBarangMasuk;
+use App\Models\StokProduk;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +27,7 @@ class BarangMasukController extends Controller
         if ($request->key) {
             $data = BarangMasuk::with('guide_driver')->where('name', $request->key)->paginate(10);
         }
-        return view('pages.barang_masuk.index', compact('data','guidedriver'));
+        return view('pages.barang_masuk.index', compact('data', 'guidedriver'));
     }
 
     /**
@@ -48,7 +50,7 @@ class BarangMasukController extends Controller
         DB::beginTransaction();
         try {
             $model = new BarangMasuk();
-            $model->trx_no = 'INV/'.Carbon::now()->format('Y/m/d').time();
+            $model->trx_no = 'INV/' . Carbon::now()->format('Y/m/d') . time();
             $model->guidedriver_id = $validated['id_guidedriver'];
             $model->date_in = $validated['date_in'];
             $model->note = $request->note;
@@ -59,11 +61,16 @@ class BarangMasukController extends Controller
             foreach ($request->get('barang') as $key => $value) {
                 $detailPesananbarangmasuk = new DetailBarangMasuk();
                 $detailPesananbarangmasuk->barang_masuk_id = $model->id;
-                $detailPesananbarangmasuk->item_id = $value;
+                $detailPesananbarangmasuk->produk_id = $value;
                 $detailPesananbarangmasuk->qty = $request->get('qty')[$key];
                 $detailPesananbarangmasuk->subtotal = $request->get('subtotal')[$key];
 
                 $detailPesananbarangmasuk->save();
+
+                $stokOld = StokProduk::where('produk_id', $value)->first();
+                $stokModel = StokProduk::where('produk_id', $value)->first();
+                $stokModel->stok = $stokOld->stok + $request->get('qty')[$key];
+                $stokModel->save();
             }
         } catch (Exception $e) {
             DB::rollback();
@@ -134,8 +141,8 @@ class BarangMasukController extends Controller
     public function ajaxSelect(Request $request)
     {
         $i = $request->no;
-        $no = $request->no+1;
+        $no = $request->no + 1;
         $barangs = Produk::get();
-        return view('pages.barang_masuk.tr', compact('i','no','barangs'));
+        return view('pages.barang_masuk.tr', compact('i', 'no', 'barangs'));
     }
 }

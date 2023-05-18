@@ -7,6 +7,7 @@ use App\Models\BarangKeluar;
 use App\Models\DetailBarangKeluar;
 use App\Models\GuideDriver;
 use App\Models\Produk;
+use App\Models\StokProduk;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -47,8 +48,9 @@ class BarangKeluarController extends Controller
         $validated = $request->validated();
         DB::beginTransaction();
         try {
+            $cekStok = '';
             $model = new BarangKeluar();
-            $model->trx_no = 'INV/'.Carbon::now()->format('Y/m/d').time();
+            $model->trx_no = 'INV/' . Carbon::now()->format('Y/m/d') . time();
             $model->guidedriver_id = $validated['id_guidedriver'];
             $model->date_out = $validated['date_out'];
             $model->note = $request->note;
@@ -59,11 +61,20 @@ class BarangKeluarController extends Controller
             foreach ($request->get('barang') as $key => $value) {
                 $detailPesananbarangkeluar = new DetailBarangKeluar();
                 $detailPesananbarangkeluar->barang_keluar_id = $model->id;
-                $detailPesananbarangkeluar->item_id = $value;
+                $detailPesananbarangkeluar->produk_id = $value;
                 $detailPesananbarangkeluar->qty = $request->get('qty')[$key];
                 $detailPesananbarangkeluar->subtotal = $request->get('subtotal')[$key];
 
                 $detailPesananbarangkeluar->save();
+
+                $stokOld = StokProduk::where('produk_id', $value)->first();
+                if ($stokOld->stok >= $request->get('qty')[$key]) {
+                    $stokModel = StokProduk::where('produk_id', $value)->first();
+                    $stokModel->stok = $stokOld->stok - $request->get('qty')[$key];
+                    $stokModel->save();
+                } else {
+                    return back()->withError('Stok barang tidak cukup.');
+                }
             }
         } catch (Exception $e) {
             DB::rollback();
@@ -84,7 +95,7 @@ class BarangKeluarController extends Controller
      */
     public function show(BarangKeluar $barangKeluar)
     {
-        return DetailBarangKeluar::with('produk')->where('barang_keluar_id', $barangKeluar ->id)->get();
+        return DetailBarangKeluar::with('produk')->where('barang_keluar_id', $barangKeluar->id)->get();
     }
 
     /**
@@ -114,8 +125,8 @@ class BarangKeluarController extends Controller
     public function ajaxSelect(Request $request)
     {
         $i = $request->no;
-        $no = $request->no+1;
+        $no = $request->no + 1;
         $barangs = Produk::get();
-        return view('pages.barang_keluar.tr', compact('i','no','barangs'));
+        return view('pages.barang_keluar.tr', compact('i', 'no', 'barangs'));
     }
 }

@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('detail_barang_keluars', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('barang_keluar_id');
-            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('produk_id');
             $table->double('qty', 14, 2);
             $table->double('subtotal', 14, 2);
             $table->timestamps();
+            $table->foreign('produk_id')->references('id')->on('produks');
+            $table->foreign('barang_keluar_id')->references('id')->on('barang_keluars');
         });
     }
 

@@ -11,6 +11,6 @@ class DetailBarangMasuk extends Model
 
     public function produk()
     {
-        return $this->belongsTo(Produk::class, 'item_id');
+        return $this->belongsTo(Produk::class);
     }
 }

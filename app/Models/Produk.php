@@ -27,4 +27,13 @@ class Produk extends Model
         return $this->belongsTo(KategoriProduk::class, 'kategori_id');
     }
 
+    /**
+     * Get the stok that owns the Produk
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function stok()
+    {
+        return $this->hasMany(StokProduk::class, 'produk_id');
+    }
 }
