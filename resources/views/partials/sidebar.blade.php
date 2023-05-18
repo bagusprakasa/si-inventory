@@ -11,11 +11,13 @@
                             Dashboard</span></a></li>
                 <hr>
                 <h5>Barang Masuk</h5>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('barang-masuk.index') }}"
-                        aria-expanded="false"><i class="fa-solid fa-list"></i> <span class="hide-menu">
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('barang-masuk.index') }}" aria-expanded="false"><i class="fa-solid fa-list"></i>
+                        <span class="hide-menu">
                             List</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('barang-masuk.create') }}"
-                        aria-expanded="false"><i class="fa-brands fa-wpforms"></i> <span class="hide-menu">
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('barang-masuk.create') }}" aria-expanded="false"><i
+                            class="fa-brands fa-wpforms"></i> <span class="hide-menu">
                             Create</span></a></li>
                 <hr>
                 <h5>Barang Keluar</h5>
@@ -23,8 +25,9 @@
                         href="{{ route('barang-keluar.index') }}" aria-expanded="false"><i class="fa-solid fa-list"></i>
                         <span class="hide-menu">
                             List</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('barang-keluar.create') }}"
-                        aria-expanded="false"><i class="fa-brands fa-wpforms"></i> <span class="hide-menu">
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('barang-keluar.create') }}" aria-expanded="false"><i
+                            class="fa-brands fa-wpforms"></i> <span class="hide-menu">
                             Create</span></a></li>
                 <hr>
                 <h5>Data Master</h5>
@@ -45,9 +48,9 @@
                         <span class="hide-menu">
                             Guide/Driver</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route('vendor.index') }}" aria-expanded="false"><i class="fa-solid fa-users"></i>
+                        href="{{ route('supplier.index') }}" aria-expanded="false"><i class="fa-solid fa-users"></i>
                         <span class="hide-menu">
-                            Vendor</span></a></li>
+                            Supplier</span></a></li>
                 <hr>
             </ul>
 

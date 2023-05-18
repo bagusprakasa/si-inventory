@@ -5,9 +5,9 @@
             <div class="col-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
-                        <li class="breadcrumb-item"><a href="{{ url('satuan') }}" class="link"><i
+                        <li class="breadcrumb-item"><a href="{{ url('supplier') }}" class="link"><i
                                     class="fa-solid fa-box-open"></i></a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('satuan') }}"
+                        <li class="breadcrumb-item"><a href="{{ url('supplier') }}"
                                 class="link">{{ ucwords(Request::segment(1)) }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
                             {{ Request::segment(2) != null ? ucwords(Request::segment(2)) : 'List' }}</li>
@@ -29,7 +29,7 @@
                         <!-- title -->
                         <div class="d-md-flex">
                             <div>
-                                <a href="{{ route('vendor.create') }}" class="btn btn-primary">Tambah Data</a>
+                                <a href="{{ route('supplier.create') }}" class="btn btn-primary">Tambah Data</a>
                             </div>
                             <div class="ms-auto">
                                 <form action="" method="GET">
@@ -66,12 +66,12 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('vendor.edit', $item->id) }}"
+                                                    <a href="{{ route('supplier.edit', $item->id) }}"
                                                         class="btn btn-success btn-sm text-white">Edit</a>
                                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
                                                         onclick="hapus({{ $item->id }})">Hapus</a>
-                                                    <form action="{{ route('vendor.destroy', $item->id) }}" method="post"
-                                                        id="delete">
+                                                    <form action="{{ route('supplier.destroy', $item->id) }}"
+                                                        method="post" id="delete">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
@@ -99,8 +99,8 @@
     </div>
     <!-- End Container fluid  -->
     <script src="
-                                https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
-                                "></script>
+                                        https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+                                        "></script>
     <script>
         function hapus(id) {
             Swal.fire({

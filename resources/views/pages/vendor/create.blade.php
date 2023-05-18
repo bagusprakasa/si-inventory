@@ -5,9 +5,9 @@
             <div class="col-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 d-flex align-items-center">
-                        <li class="breadcrumb-item"><a href="{{ url('satuan') }}" class="link"><i
+                        <li class="breadcrumb-item"><a href="{{ url('supplier') }}" class="link"><i
                                     class="fa-solid fa-box-open"></i></a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('satuan') }}"
+                        <li class="breadcrumb-item"><a href="{{ url('supplier') }}"
                                 class="link">{{ ucwords(Request::segment(1)) }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
                             {{ Request::segment(2) != null ? ucwords(Request::segment(2)) : 'List' }}</li>
@@ -26,7 +26,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material mx-2" action="{{ route('vendor.store') }}"
+                        <form class="form-horizontal form-material mx-2" action="{{ route('supplier.store') }}"
                             method="POST">
                             @csrf
                             <div class="form-group">
@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-success text-white">Simpan</button>
-                                    <a href="{{ route('vendor.index') }}" class="btn btn-secondary text-white">Kembali</a>
+                                    <a href="{{ route('supplier.index') }}" class="btn btn-secondary text-white">Kembali</a>
                                 </div>
                             </div>
                         </form>
