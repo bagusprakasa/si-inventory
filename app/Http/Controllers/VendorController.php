@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VendorRequest;
 use App\Models\Vendor;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -30,9 +33,22 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VendorRequest $request)
     {
-        //
+        $validate = $request->validated();
+        try {
+            $model = new Vendor;
+            $model->nama = $validate['name'];
+            $model->save();
+        } catch (Exception $e) {
+            return $e;
+            // return back()->withError('Terjadi kesalahan.');
+        } catch (QueryException $e) {
+            return $e;
+            // return back()->withError('Terjadi kesalahan pada database.');
+        }
+
+        return redirect()->route('supplier.index')->withStatus('Data berhasil disimpan.');
     }
 
     /**
