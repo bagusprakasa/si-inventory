@@ -79,13 +79,6 @@
                                                     <a href="#" class="btn btn-success btn-sm text-white"
                                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                         onclick="detail({{ $item->id }})">Detail</a>
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
-                                                        onclick="hapus({{ $item->id }})">Hapus</a>
-                                                    <form action="{{ route('barang-keluar.destroy', $item->id) }}"
-                                                        method="post" id="delete">
-                                                        @csrf
-                                                        @method('delete')
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -139,8 +132,8 @@
     </div>
     <!-- End Container fluid  -->
     <script src="
-                                    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
-                                    "></script>
+                                        https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+                                        "></script>
     <script>
         function hapus(id) {
             Swal.fire({

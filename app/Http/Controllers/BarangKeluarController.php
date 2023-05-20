@@ -22,9 +22,9 @@ class BarangKeluarController extends Controller
     public function index(Request $request)
     {
         $guidedriver = GuideDriver::get();
-        $data = BarangKeluar::with('guide_driver')->paginate(10);
+        $data = BarangKeluar::with('guide_driver')->orderBy('date_out', 'asc')->paginate(10);
         if ($request->key) {
-            $data = BarangKeluar::with('guide_driver')->where('name', $request->key)->paginate(10);
+            $data = BarangKeluar::with('guide_driver')->where('name', $request->key)->orderBy('date_out', 'asc')->paginate(10);
         }
         return view('pages.barang_keluar.index', compact('data'));
     }

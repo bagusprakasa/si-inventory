@@ -23,9 +23,9 @@ class BarangMasukController extends Controller
     public function index(Request $request)
     {
         $guidedriver = GuideDriver::get();
-        $data = BarangMasuk::with('guide_driver')->paginate(10);
+        $data = BarangMasuk::with('guide_driver')->orderBy('date_in', 'asc')->paginate(10);
         if ($request->key) {
-            $data = BarangMasuk::with('guide_driver')->where('name', $request->key)->paginate(10);
+            $data = BarangMasuk::with('guide_driver')->where('name', $request->key)->orderBy('date_in', 'asc')->paginate(10);
         }
         return view('pages.barang_masuk.index', compact('data', 'guidedriver'));
     }
