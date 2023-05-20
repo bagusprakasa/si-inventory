@@ -12,6 +12,7 @@ use App\Models\GuideDriver;
 use App\Http\Requests\BarangMasukRequest;
 use App\Models\DetailBarangMasuk;
 use App\Models\StokProduk;
+use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -36,9 +37,10 @@ class BarangMasukController extends Controller
     public function create()
     {
         $guidedriver = GuideDriver::get();
+        $sup = Vendor::get();
         $countItem = is_array(old('barang')) ? count(old('barang')) : 1;
         $barang = Produk::get();
-        return view('pages.barang_masuk.create', compact("guidedriver", 'countItem', 'barang'));
+        return view('pages.barang_masuk.create', compact("guidedriver", 'countItem', 'barang', 'sup'));
     }
 
     /**
@@ -51,7 +53,13 @@ class BarangMasukController extends Controller
         try {
             $model = new BarangMasuk();
             $model->trx_no = 'INV/' . Carbon::now()->format('Y/m/d') . time();
-            $model->guidedriver_id = $validated['id_guidedriver'];
+            if ($request->vendor_guide_driver == 'supplier') {
+                $model->vendor_id = $request->id_supplier;
+            } else {
+                $model->guidedriver_id = $request->id_guidedriver;
+            }
+
+            // $model->guidedriver_id = $validated['id_guidedriver'];
             $model->date_in = $validated['date_in'];
             $model->note = $request->note;
             $model->total_qty = $request->total_qty;

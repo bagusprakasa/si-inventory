@@ -175,7 +175,6 @@
                 url: "{{ url('barang-keluar') }}/" + id,
                 dataType: "json",
                 success: function(response) {
-                    console.log(response);
                     $.each(response, function(i, v) {
                         $('#modal-detail').append(
                             `

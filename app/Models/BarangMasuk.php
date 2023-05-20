@@ -17,5 +17,8 @@ class BarangMasuk extends Model
     {
         return $this->belongsTo(GuideDriver::class, 'guidedriver_id');
     }
-    
+    public function supplier()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id');
+    }
 }

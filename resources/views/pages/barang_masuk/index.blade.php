@@ -57,7 +57,7 @@
                                     <th class="border-top-0">Nomor Transaksi</th>
                                     <th class="border-top-0">Tanggal Masuk</th>
                                     <th class="border-top-0">Catatan</th>
-                                    <th class="border-top-0">Penanggung Jawab</th>
+                                    <th class="border-top-0">Penanggung Jawab / Supplier</th>
                                     <th class="border-top-0">Total Barang</th>
                                     <th class="border-top-0">Grandtotal</th>
                                     <th class="border-top-0">Aksi</th>
@@ -74,7 +74,8 @@
                                             <td>{{ $item->trx_no }}</td>
                                             <td>{{ $item->date_in }}</td>
                                             <td>{{ $item->note }}</td>
-                                            <td>{{ $item->guide_driver->name }}</td>
+                                            <td>{{ $item->guide_driver != null ? $item->guide_drive->name : $item->supplier->nama }}
+                                            </td>
                                             <td>{{ $item->total_qty }}</td>
                                             <td>{{ number_format($item->grand_total, 0, ',', '.') }}</td>
                                             <td>
@@ -135,8 +136,8 @@
 
     <!-- End Container fluid  -->
     <script src="
-                                    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
-                                    "></script>
+                                        https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+                                        "></script>
     <script>
         function hapus(id) {
             Swal.fire({
@@ -178,7 +179,10 @@
                 url: "{{ url('barang-masuk') }}/" + id,
                 dataType: "json",
                 success: function(response) {
-                    ,
+                    <<
+                    << << < HEAD, ===
+                    === = >>>
+                    >>> > 1e520 b20064c91c6d78938032749d7024dc617a6
                     $.each(response, function(i, v) {
                         $('#modal-detail').append(
                             `
