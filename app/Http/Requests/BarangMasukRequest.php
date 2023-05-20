@@ -13,7 +13,6 @@ class BarangMasukRequest extends FormRequest
     public function authorize(): bool
     {
         return Auth::check();
-
     }
     /**
      * Get the validation rules that apply to the request.
@@ -23,7 +22,7 @@ class BarangMasukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_guidedriver' => ['required'],
+            'vendor_guide_driver' => ['required'],
             'date_in' => ['required'],
             // 'total_qty' => ['required'],
             // 'grand_total' => ['required'],
@@ -31,9 +30,9 @@ class BarangMasukRequest extends FormRequest
     }
 
     public function messages(): array
-      {
-          return [
-              'required' => ':attribute harus diisi.',
-          ];
-      }
+    {
+        return [
+            'required' => ':attribute harus diisi.',
+        ];
+    }
 }
