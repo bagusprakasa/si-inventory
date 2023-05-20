@@ -143,8 +143,8 @@
 
     <!-- End Container fluid  -->
     <script src="
-                                            https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
-                                            "></script>
+                                                https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+                                                "></script>
     <script>
         function hapus(id) {
             Swal.fire({
@@ -186,7 +186,6 @@
                 url: "{{ url('barang-masuk') }}/" + id,
                 dataType: "json",
                 success: function(response) {
-                    ,
                     $.each(response, function(i, v) {
                         $('#modal-detail').append(
                             `
