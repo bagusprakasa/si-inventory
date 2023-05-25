@@ -74,7 +74,7 @@
                                             <td>{{ $item->trx_no }}</td>
                                             <td>{{ $item->date_in }}</td>
                                             <td>{{ $item->note }}</td>
-                                            <td>{{ $item->guide_driver != null ? $item->guide_driver->name : $item->supplier->namaname }}
+                                            <td>{{ $item->guide_driver != null ? $item->guide_driver->name : $item->supplier->nama }}
                                             </td>
                                             <td>{{ $item->total_qty }}</td>
                                             <td>{{ number_format($item->grand_total, 0, ',', '.') }}</td>
