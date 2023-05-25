@@ -74,7 +74,7 @@
                                             <td>{{ $item->trx_no }}</td>
                                             <td>{{ $item->date_in }}</td>
                                             <td>{{ $item->note }}</td>
-                                            <td>{{ $item->guide_driver->name }}
+                                            <td>{{ $item->guide_driver != null ? $item->guide_driver->name : $item->supplier->namaname }}
                                             </td>
                                             <td>{{ $item->total_qty }}</td>
                                             <td>{{ number_format($item->grand_total, 0, ',', '.') }}</td>
@@ -135,9 +135,7 @@
     </div>
 
     <!-- End Container fluid  -->
-    <script src="
-                                                        https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
-                                                        "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
     <script>
         function hapus(id) {
             Swal.fire({
@@ -179,16 +177,6 @@
                 url: "{{ url('barang-masuk') }}/" + id,
                 dataType: "json",
                 success: function(response) {
-                    <<
-                    <<
-                    <<
-                    <
-                    HEAD, ===
-                    ===
-                    = >>>
-                    >>>
-                    >
-                    1e520 b20064c91c6d78938032749d7024dc617a6
                     $.each(response, function(i, v) {
                         $('#modal-detail').append(
                             `
